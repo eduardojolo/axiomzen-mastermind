@@ -1,4 +1,4 @@
-package com.example;
+package br.com.mastermind.test;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -6,12 +6,12 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import br.com.mastermind.AxiomzenMastermindApplication;
+import br.com.mastermind.MastermindApplication;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = AxiomzenMastermindApplication.class)
+@SpringApplicationConfiguration(classes = MastermindApplication.class)
 @WebAppConfiguration
-public class AxiomzenMastermindApplicationTests {
+public class MastermindApplicationTests {
 
 	@Test
 	public void contextLoads() {
