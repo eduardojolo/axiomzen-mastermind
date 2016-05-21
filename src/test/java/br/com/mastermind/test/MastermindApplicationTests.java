@@ -13,8 +13,26 @@ import br.com.mastermind.MastermindApplication;
 @WebAppConfiguration
 public class MastermindApplicationTests {
 
+	
+	
 	@Test
-	public void contextLoads() {
+	public void testGuessTwoWhiteKeyPegs() {
+		
+	}
+	
+	@Test
+	public void testGuessOneBlackKeyPeg() {
+		
+	}
+	
+	@Test
+	public void testGuessMiss() {
+		
+	}
+	
+	@Test
+	public void testWin() {
+		
 	}
 
 }
