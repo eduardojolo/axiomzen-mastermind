@@ -41,6 +41,7 @@ Done! Now you should have a local instance of the axiomzen-mastermind microservi
    This version of the game has no UI so, in order to play, the players should send requests to the microservice. The following endpoints are available:
     
 + */newgame* (POST):
+
 To start a new game one of the players should send a POST to /newgame. The following JSON is an example of a valid request:
 
         {
@@ -62,6 +63,7 @@ The properties purpose are:
 Where the `gameKey` identifies the game and the `playerKey` the player that created the game. Both values are necessary in the others endpoints.
 
 + */joingame* (POST):
+
 If a game was created with the `numberOfPlayers` greater than 1 the game will wait for all the players to call the `/joingame` and get their player keys.
 
   Request example:
@@ -73,21 +75,22 @@ If a game was created with the `numberOfPlayers` greater than 1 the game will wa
 
 
 + */guess* (POST):
+
 To actually play the players should use the /guess and submit their guesses. The available color codes are:
 
     `'R', 'B', 'G', 'P', 'Y', 'O', 'V', 'M'`
 
   Lets see an example:
 
-          `{
+          {
             "gameKey" : "[B@7d5d41f5",
             "playerKey" : "[B@24af8ebf",
             "guessedCode" : ["R","G","P","Y","V","M","M","G"]
-          }`
+          }
 In this example the player `[B@24af8ebf` guessed that the code of the game `[B@7d5d41f5` was `["R","G","P","Y","V","M","M","G"]`.
 The response was:
 
-        `{
+        {
             "correctCode": false,
             "keyPegs": [
                 "W",
@@ -96,7 +99,7 @@ The response was:
                 "W"
             ],
             "gameHasAWinner": false
-          }`
+          }
 
   `correctCode`: Indicates if the guessed code was correct or not.
 
@@ -105,6 +108,7 @@ The response was:
   `gameHasAWinner`: This indicates if the game has been solved by any of the players. Important for multiplayer games. The player could use the `/gameguesses` to see who won and all the players guesses.
 
 + */gameguesses* (GET):
+
 If a player wants to see the historic of a game he can access it in `/gameguesses`:
 
       localhost:8080/gameguesses?gameKey=[B@2b1217d8
