@@ -91,7 +91,8 @@ The response was:
               "W"
           ],
           "gameHasAWinner": false
-      }`
+        }`
+
 `correctCode`: Indicates if the guessed code was correct or not.
 `keyPegs`: For each correct color in the wrong position a white peg (W) is given. For each correct color in the correct position a black peg (B) is given.
 `gameHasAWinner`: This indicates if the game has been solved by any of the players. Important for multiplayer games. The player could use the `/gameguesses` to see who won and all the players guesses.
