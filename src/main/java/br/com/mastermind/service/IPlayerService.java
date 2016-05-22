@@ -3,7 +3,7 @@ package br.com.mastermind.service;
 import br.com.mastermind.dto.PlayerDTO;
 
 /**
- *  Interface of the methods that access the players information.
+ * Interface of the methods that access the players information.
  * 
  * @author Eduardo Jolo
  *

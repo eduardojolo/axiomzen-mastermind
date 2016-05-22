@@ -11,6 +11,12 @@ import br.com.mastermind.dto.PlayerGuessesDTO;
 import br.com.mastermind.hazelcast.HazelcastConfiguration;
 import br.com.mastermind.hazelcast.HazelcastMastermindUtil;
 
+/**
+ * Implementation of the methods that interact with the guess entity.
+ * 
+ * @author Eduardo Jolo
+ *
+ */
 @Service
 public class GuessDAOImpl implements IGuessDAO {
 
@@ -20,10 +26,6 @@ public class GuessDAOImpl implements IGuessDAO {
 		IMap<String, Object> guessCache = HazelcastMastermindUtil.getIMap(HazelcastConfiguration.GUESSES_CACHE_MAP_NAME);
 		
 		Map<String, PlayerGuessesDTO> guesses = (Map<String, PlayerGuessesDTO>) guessCache.get(gameKey);
-		
-		if(guesses == null) {
-			// go to database
-		}
 		
 		return guesses;
 	}

@@ -3,6 +3,12 @@ package br.com.mastermind.exceptions;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+/**
+ * Exception to be used in case no player could be found with the given player key.
+ * 
+ * @author Eduardo Jolo
+ *
+ */
 @ResponseStatus(value = HttpStatus.NOT_FOUND)
 public class NoPlayerWasFoundException extends RuntimeException {
 

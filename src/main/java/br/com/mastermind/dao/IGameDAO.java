@@ -2,6 +2,12 @@ package br.com.mastermind.dao;
 
 import br.com.mastermind.dto.GameDTO;
 
+/**
+ * Interface for the methods that interact with the game entity.
+ * 
+ * @author Eduardo Jolo
+ *
+ */
 public interface IGameDAO {
 
 	/**

@@ -31,9 +31,7 @@ public class HazelcastMastermindUtil {
 	private static Map<String, IMap<String, Object>> cacheMaps = new HashMap<String, IMap<String, Object>>();
 
 	static {
-
 		hazelcastInstance = Hazelcast.getHazelcastInstanceByName(HazelcastConfiguration.LOCAL_INSTANCE_NAME);
-
 	}
 
 	/**

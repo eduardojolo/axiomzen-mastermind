@@ -2,6 +2,12 @@ package br.com.mastermind.dao;
 
 import br.com.mastermind.dto.PlayerDTO;
 
+/**
+ * Interface for the methods that interact with the player entity.
+ * 
+ * @author Eduardo Jolo
+ *
+ */
 public interface IPlayerDAO {
 
 	/**

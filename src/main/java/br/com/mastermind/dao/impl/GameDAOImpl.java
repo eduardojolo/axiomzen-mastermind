@@ -9,6 +9,12 @@ import br.com.mastermind.dto.GameDTO;
 import br.com.mastermind.hazelcast.HazelcastConfiguration;
 import br.com.mastermind.hazelcast.HazelcastMastermindUtil;
 
+/**
+ * Implementation of the methods that interact with the game entity.
+ * 
+ * @author Eduardo Jolo
+ *
+ */
 @Service
 public class GameDAOImpl implements IGameDAO {
 
@@ -17,11 +23,7 @@ public class GameDAOImpl implements IGameDAO {
 		IMap<String, Object> gameCache = HazelcastMastermindUtil.getIMap(HazelcastConfiguration.GAME_CACHE_MAP_NAME);
 		
 		GameDTO game = (GameDTO) gameCache.get(gameKey);
-		
-		if(game == null) {
-			// go to database
-		}
-		
+			
 		return game;
 	}
 	

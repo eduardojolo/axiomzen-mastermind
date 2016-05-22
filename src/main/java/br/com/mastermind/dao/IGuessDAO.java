@@ -4,6 +4,12 @@ import java.util.Map;
 
 import br.com.mastermind.dto.PlayerGuessesDTO;
 
+/**
+ * Interface for the methods that interact with the guess entity.
+ * 
+ * @author Eduardo Jolo
+ *
+ */
 public interface IGuessDAO {
 
 	/**

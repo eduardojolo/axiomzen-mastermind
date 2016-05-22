@@ -1,7 +1,6 @@
 package br.com.mastermind.service.impl;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
@@ -37,62 +36,75 @@ public class GameServiceImpl implements IGameService {
 
 	@Autowired
 	private IPlayerService playerService;
-	
+
 	@Autowired
 	private IGameDAO gameDAO;
-	
+
 	@Autowired
 	private IGuessDAO guessDAO;
-	
+
 	@Override
 	public EnterGameResponseDTO newGame(String playerName) {
 
 		Long timeInMillis = Calendar.getInstance().getTimeInMillis();
 		String gameKey = CryptoUtil.encryptString(timeInMillis + playerName);
 		String playerKey = CryptoUtil.encryptString(playerName + gameKey);
-		
+
 		this.createGame(gameKey, timeInMillis);
-		
+
 		playerService.savePlayer(new PlayerDTO(playerKey, playerName));
-		
+
 		return new EnterGameResponseDTO(playerKey, gameKey);
 	}
-	
+
 	@Override
 	public EnterGameResponseDTO joinGame(JoinGameRequestDTO joinGameRequestDTO) {
 		GameDTO game = this.getGame(joinGameRequestDTO.getGameKey());
-		
+
 		String playerKey = CryptoUtil.encryptString(joinGameRequestDTO.getPlayerName() + game.getGameKey());
-		
+
 		playerService.savePlayer(new PlayerDTO(playerKey, joinGameRequestDTO.getPlayerName()));
-		
+
 		return new EnterGameResponseDTO(playerKey, game.getGameKey());
 	}
-	
+
 	@Override
 	public GameGuessesResponseDTO getPlayerGuessesForGame(String gameKey) {
 		GameDTO game = this.getGame(gameKey);
 		Map<String, PlayerGuessesDTO> mapGameGuesses = guessDAO.findGuesses(gameKey);
-		
+
 		return new GameGuessesResponseDTO(game.getWinner(), new ArrayList<PlayerGuessesDTO>(mapGameGuesses.values()));
 	}
-	
+
 	@Override
 	public synchronized void updateWinner(String gameKey, String playerName) {
 		GameDTO game = this.getGame(gameKey);
-		
-		if(StringUtils.isEmpty(game.getWinner())) {			
+
+		if (StringUtils.isEmpty(game.getWinner())) {
 			game.setWinner(playerName);
-			
+
 			gameDAO.saveGame(game);
 		}
 	}
-	
+
+	@Override
+	public GameDTO getGame(String gameKey) {
+		GameDTO game = gameDAO.findGame(gameKey);
+
+		if (game == null) {
+			throw new NoGameWasFoundException(gameKey);
+		}
+
+		return game;
+	}
+
 	/**
 	 * Create the game.
 	 * 
-	 * @param gameKey Game key
-	 * @param timeInMillis start time
+	 * @param gameKey
+	 *            Game key
+	 * @param timeInMillis
+	 *            start time
 	 */
 	private void createGame(String gameKey, Long timeInMillis) {
 		List<Character> code = this.generateCode();
@@ -101,7 +113,7 @@ public class GameServiceImpl implements IGameService {
 
 		gameDAO.saveGame(newGame);
 	}
-	
+
 	/**
 	 * Generate a new game code.
 	 * 
@@ -114,28 +126,8 @@ public class GameServiceImpl implements IGameService {
 		for (int i = 0; i < MastermindConstants.NUMBER_OF_POSITIONS; i++) {
 			code.add(MastermindConstants.COLORS.get(randomGenerator.nextInt(MastermindConstants.NUMBER_OF_COLORS)));
 		}
-		
-		//TODO remove
-		code = Arrays.asList('G','G','G','G');
-		
 
 		return code;
-	}
-	
-	/**
-	 * Gets a game by its key.
-	 * 
-	 * @param gameKey Game key
-	 * @return Game
-	 */
-	public GameDTO getGame(String gameKey) {
-		GameDTO game = gameDAO.findGame(gameKey);
-		
-		if(game == null) {
-			throw new NoGameWasFoundException(gameKey);
-		}
-		
-		return game;
 	}
 
 }

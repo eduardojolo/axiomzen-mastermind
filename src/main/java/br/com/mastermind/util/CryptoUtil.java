@@ -10,8 +10,17 @@ import org.apache.log4j.Logger;
 
 import br.com.mastermind.exceptions.MastermindGenericException;
 
+/**
+ * Utilitary class for encrypting strings.
+ * 
+ * @author Eduardo Jolo
+ *
+ */
 public class CryptoUtil {
 	
+	/**
+	 * Logger instance.
+	 */
 	private static final Logger LOGGER = Logger.getLogger(CryptoUtil.class);
 	
 	private static Cipher desCipher;

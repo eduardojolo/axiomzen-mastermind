@@ -52,11 +52,10 @@ public interface IGameService {
 	void updateWinner(String gameKey, String playerName);
 
 	/**
-	 * Get game.
+	 * Gets a game by its key.
 	 * 
-	 * @param gameKey
-	 *            Game key
-	 * @return game
+	 * @param gameKey Game key
+	 * @return Game
 	 */
 	GameDTO getGame(String gameKey);
 

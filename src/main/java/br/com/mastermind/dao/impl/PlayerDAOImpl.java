@@ -9,6 +9,12 @@ import br.com.mastermind.dto.PlayerDTO;
 import br.com.mastermind.hazelcast.HazelcastConfiguration;
 import br.com.mastermind.hazelcast.HazelcastMastermindUtil;
 
+/**
+ * Implementation of the methods that interact with the player entity.
+ * 
+ * @author Eduardo Jolo
+ *
+ */
 @Service
 public class PlayerDAOImpl implements IPlayerDAO{
 
@@ -17,10 +23,6 @@ public class PlayerDAOImpl implements IPlayerDAO{
 		IMap<String, Object> playerCache = HazelcastMastermindUtil.getIMap(HazelcastConfiguration.PLAYERS_CACHE_MAP_NAME);
 		
 		PlayerDTO player = (PlayerDTO) playerCache.get(playerKey);
-		
-		if(player == null) {
-			// go to database
-		}
 		
 		return player;
 	}

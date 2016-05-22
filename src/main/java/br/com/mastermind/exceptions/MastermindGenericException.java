@@ -3,6 +3,12 @@ package br.com.mastermind.exceptions;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+/**
+ * Mastermind generic exception to be returned in non expected scenarios.
+ * 
+ * @author Eduardo Jolo
+ *
+ */
 @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
 public class MastermindGenericException extends RuntimeException {
 

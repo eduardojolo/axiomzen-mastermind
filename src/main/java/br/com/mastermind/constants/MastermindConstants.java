@@ -37,12 +37,12 @@ public final class MastermindConstants {
 	/**
 	 * Number of different colors available.
 	 */
-	public static final int NUMBER_OF_COLORS = 4;
+	public static final int NUMBER_OF_COLORS = 8;
 	
 	/**
 	 * Number of positions in the code and guesses.
 	 */
-	public static final int NUMBER_OF_POSITIONS = 4;
+	public static final int NUMBER_OF_POSITIONS = 8;
 	
 	/**
 	 * Private contructor for static class.
