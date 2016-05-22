@@ -82,16 +82,16 @@ To actually play the players should use the /guess and submit their guesses. The
 In this example the player `[B@24af8ebf` guessed that the code of the game `[B@7d5d41f5` was `["R","G","P","Y","V","M","M","G"]`.
 The response was:
 
-      `{
-          "correctCode": false,
-          "keyPegs": [
-              "W",
-              "W",
-              "W",
-              "W"
-          ],
-          "gameHasAWinner": false
-        }`
+        `{
+            "correctCode": false,
+            "keyPegs": [
+                "W",
+                "W",
+                "W",
+                "W"
+            ],
+            "gameHasAWinner": false
+          }`
 
   `correctCode`: Indicates if the guessed code was correct or not.
 
