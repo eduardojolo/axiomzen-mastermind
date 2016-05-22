@@ -2,13 +2,19 @@ package br.com.mastermind.dto;
 
 import java.io.Serializable;
 
+/**
+ * Request for the guesses made in a specific game.
+ * 
+ * @author Eduardo Jolo
+ *
+ */
 public class GameGuessesRequestDTO implements Serializable {
 
 	/**
 	 * UID.
 	 */
 	private static final long serialVersionUID = -9120503805917731175L;
-	
+
 	private String gameKey;
 
 	public GameGuessesRequestDTO() {
@@ -28,10 +34,11 @@ public class GameGuessesRequestDTO implements Serializable {
 	}
 
 	/**
-	 * @param gameKey the gameKey to set
+	 * @param gameKey
+	 *            the gameKey to set
 	 */
 	public void setGameKey(String gameKey) {
 		this.gameKey = gameKey;
 	}
-	
+
 }

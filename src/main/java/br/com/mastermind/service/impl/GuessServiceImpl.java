@@ -1,6 +1,7 @@
 package br.com.mastermind.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -100,11 +101,17 @@ public class GuessServiceImpl implements IGuessService {
 	private synchronized void saveGuess(String gameKey, String playerKey, String playerName, List<Character> guessCode) {
 		Map<String, PlayerGuessesDTO> mapGameGuesses = guessDAO.findGuesses(gameKey);
 		
-		PlayerGuessesDTO playerGuesses = mapGameGuesses.get(playerKey);
+		PlayerGuessesDTO playerGuesses = null;
+		if(mapGameGuesses == null) {
+			mapGameGuesses = new HashMap<String, PlayerGuessesDTO>();
+		} else {
+			playerGuesses = mapGameGuesses.get(playerKey);
+		}
 		
 		if(playerGuesses == null) {
 			playerGuesses = new PlayerGuessesDTO(playerName);
 		}
+		
 		playerGuesses.getGuesses().add(guessCode);
 		
 		mapGameGuesses.put(playerKey, playerGuesses);

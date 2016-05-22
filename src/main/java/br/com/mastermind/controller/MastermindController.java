@@ -6,11 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.mastermind.dto.CreateGameRequestDTO;
 import br.com.mastermind.dto.EnterGameResponseDTO;
-import br.com.mastermind.dto.GameGuessesRequestDTO;
 import br.com.mastermind.dto.GameGuessesResponseDTO;
 import br.com.mastermind.dto.GuessRequestDTO;
 import br.com.mastermind.dto.GuessResponseDTO;
@@ -41,7 +41,7 @@ public class MastermindController {
 	 * @return game key + player key
 	 */
 	@RequestMapping(value="/newgame", method= RequestMethod.POST, consumes="application/json")
-	public EnterGameResponseDTO newGame(@RequestBody CreateGameRequestDTO createGameRequestDTO) {
+	public EnterGameResponseDTO newGame(@Valid @RequestBody CreateGameRequestDTO createGameRequestDTO) {
 		return gameService.newGame(createGameRequestDTO.getPlayerName());
 	}
 	
@@ -71,12 +71,12 @@ public class MastermindController {
 	/**
 	 * Gets a list of all the guesses mades by all the players in a game.
 	 * 
-	 * @param gameGuessesRequestDTO Game
+	 * @param gameKey Game key
 	 * @return List of guesses for a game
 	 */
-	@RequestMapping(value="/gameguesses", method= RequestMethod.GET, consumes="application/json")
-	public GameGuessesResponseDTO getPlayerGuessesForGame(@Valid @RequestBody GameGuessesRequestDTO gameGuessesRequestDTO) {
-		return gameService.getPlayerGuessesForGame(gameGuessesRequestDTO.getGameKey());
+	@RequestMapping(value="/gameguesses", method= RequestMethod.GET)
+	public GameGuessesResponseDTO getPlayerGuessesForGame(@RequestParam String gameKey) {
+		return gameService.getPlayerGuessesForGame(gameKey);
 	}
 	
 }

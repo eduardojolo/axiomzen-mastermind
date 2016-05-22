@@ -3,6 +3,12 @@ package br.com.mastermind.dto;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * Response with the guesses of all the players in a specific game
+ * 
+ * @author Eduardo Jolo
+ *
+ */
 public class GameGuessesResponseDTO implements Serializable {
 
 	/**

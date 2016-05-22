@@ -4,7 +4,18 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * DTO with the game informations.
+ * 
+ * @author Eduardo Jolo
+ *
+ */
 public class GameDTO implements Serializable {
+
+	/**
+	 * UID.
+	 */
+	private static final long serialVersionUID = 4786832551502242419L;
 
 	private String gameKey;
 
@@ -13,13 +24,13 @@ public class GameDTO implements Serializable {
 	private Long startTime;
 
 	private Set<Character> codeColors;
-	
+
 	private String winner;
 
 	public GameDTO() {
 		super();
 	}
-	
+
 	public GameDTO(String gameKey, List<Character> code, Long startTime, Set<Character> codeColors) {
 		super();
 		this.gameKey = gameKey;
@@ -96,7 +107,8 @@ public class GameDTO implements Serializable {
 	}
 
 	/**
-	 * @param winner the winner to set
+	 * @param winner
+	 *            the winner to set
 	 */
 	public void setWinner(String winner) {
 		this.winner = winner;

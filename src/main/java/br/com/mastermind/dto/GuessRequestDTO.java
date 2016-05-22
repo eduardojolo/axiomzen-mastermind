@@ -23,28 +23,18 @@ public class GuessRequestDTO implements Serializable {
 
 	@NotNull
 	private String gameKey;
-	
+
 	@NotNull
 	private String playerKey;
-	
+
 	@NotNull
-	@Size(min=MastermindConstants.NUMBER_OF_POSITIONS, max=MastermindConstants.NUMBER_OF_POSITIONS)
+	@Size(min = MastermindConstants.NUMBER_OF_POSITIONS, max = MastermindConstants.NUMBER_OF_POSITIONS)
 	private List<Character> guessedCode;
 
-	/**
-	 * Default constructor.
-	 */
 	public GuessRequestDTO() {
 		super();
 	}
-	
-	/**
-	 * Composed constructor.
-	 * 
-	 * @param gameKey Game key
-	 * @param playerKey Player key
-	 * @param guessedCode Guessed code
-	 */
+
 	public GuessRequestDTO(String gameKey, String playerKey, List<Character> guessedCode) {
 		super();
 		this.gameKey = gameKey;
@@ -60,7 +50,8 @@ public class GuessRequestDTO implements Serializable {
 	}
 
 	/**
-	 * @param gameKey the gameKey to set
+	 * @param gameKey
+	 *            the gameKey to set
 	 */
 	public void setGameKey(String gameKey) {
 		this.gameKey = gameKey;
@@ -74,7 +65,8 @@ public class GuessRequestDTO implements Serializable {
 	}
 
 	/**
-	 * @param playerKey the playerKey to set
+	 * @param playerKey
+	 *            the playerKey to set
 	 */
 	public void setPlayerKey(String playerKey) {
 		this.playerKey = playerKey;
@@ -88,10 +80,11 @@ public class GuessRequestDTO implements Serializable {
 	}
 
 	/**
-	 * @param guessedCode the guessedCode to set
+	 * @param guessedCode
+	 *            the guessedCode to set
 	 */
 	public void setGuessedCode(List<Character> guessedCode) {
 		this.guessedCode = guessedCode;
 	}
-	
+
 }

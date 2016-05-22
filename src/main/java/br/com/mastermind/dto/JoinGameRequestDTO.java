@@ -4,6 +4,12 @@ import java.io.Serializable;
 
 import javax.validation.constraints.NotNull;
 
+/**
+ * Request to join an existing game.
+ * 
+ * @author Eduardo Jolo
+ *
+ */
 public class JoinGameRequestDTO implements Serializable {
 
 	/**

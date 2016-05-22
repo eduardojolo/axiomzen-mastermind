@@ -4,6 +4,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Stores the guesses made by a player in a game.
+ * 
+ * @author Eduardo Jolo
+ *
+ */
 public class PlayerGuessesDTO implements Serializable {
 
 	/**
@@ -12,14 +18,14 @@ public class PlayerGuessesDTO implements Serializable {
 	private static final long serialVersionUID = -3625160429390749570L;
 
 	private String playerName;
-	
+
 	private List<List<Character>> guesses;
 
 	public PlayerGuessesDTO() {
 		super();
 		guesses = new ArrayList<>();
 	}
-	
+
 	public PlayerGuessesDTO(String playerName) {
 		super();
 		this.playerName = playerName;
@@ -40,7 +46,8 @@ public class PlayerGuessesDTO implements Serializable {
 	}
 
 	/**
-	 * @param playerName the playerName to set
+	 * @param playerName
+	 *            the playerName to set
 	 */
 	public void setPlayerName(String playerName) {
 		this.playerName = playerName;
@@ -54,10 +61,11 @@ public class PlayerGuessesDTO implements Serializable {
 	}
 
 	/**
-	 * @param guesses the guesses to set
+	 * @param guesses
+	 *            the guesses to set
 	 */
 	public void setGuesses(List<List<Character>> guesses) {
 		this.guesses = guesses;
 	}
-	
+
 }

@@ -3,6 +3,12 @@ package br.com.mastermind.dto;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * Response for a player guess. Contains the key pegs.
+ * 
+ * @author Eduardo Jolo
+ *
+ */
 public class GuessResponseDTO implements Serializable {
 
 	/**
@@ -11,7 +17,7 @@ public class GuessResponseDTO implements Serializable {
 	private static final long serialVersionUID = 4373743430590639978L;
 
 	private boolean correctCode;
-	
+
 	private List<Character> keyPegs;
 
 	public GuessResponseDTO() {
@@ -32,7 +38,8 @@ public class GuessResponseDTO implements Serializable {
 	}
 
 	/**
-	 * @param correctCode the correctCode to set
+	 * @param correctCode
+	 *            the correctCode to set
 	 */
 	public void setCorrectCode(boolean correctCode) {
 		this.correctCode = correctCode;
@@ -46,12 +53,11 @@ public class GuessResponseDTO implements Serializable {
 	}
 
 	/**
-	 * @param keyPegs the keyPegs to set
+	 * @param keyPegs
+	 *            the keyPegs to set
 	 */
 	public void setKeyPegs(List<Character> keyPegs) {
 		this.keyPegs = keyPegs;
 	}
 
-	
-	
 }

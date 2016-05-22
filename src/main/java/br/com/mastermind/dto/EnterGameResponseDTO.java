@@ -3,7 +3,7 @@ package br.com.mastermind.dto;
 import java.io.Serializable;
 
 /**
- * Reponse for a new game created
+ * Reponse for entering a game.
  * 
  * @author Eduardo Jolo
  *
@@ -15,9 +15,9 @@ public class EnterGameResponseDTO implements Serializable {
 	 */
 	private static final long serialVersionUID = 9017083729748858114L;
 
-	private String playerKey;
-	
 	private String gameKey;
+
+	private String playerKey;
 
 	public EnterGameResponseDTO() {
 		super();
@@ -37,7 +37,8 @@ public class EnterGameResponseDTO implements Serializable {
 	}
 
 	/**
-	 * @param playerKey the playerKey to set
+	 * @param playerKey
+	 *            the playerKey to set
 	 */
 	public void setPlayerKey(String playerKey) {
 		this.playerKey = playerKey;
@@ -51,11 +52,11 @@ public class EnterGameResponseDTO implements Serializable {
 	}
 
 	/**
-	 * @param gameKey the gameKey to set
+	 * @param gameKey
+	 *            the gameKey to set
 	 */
 	public void setGameKey(String gameKey) {
 		this.gameKey = gameKey;
 	}
-	
-	
+
 }

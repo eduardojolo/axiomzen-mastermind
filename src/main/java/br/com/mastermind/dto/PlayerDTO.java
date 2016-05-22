@@ -2,6 +2,12 @@ package br.com.mastermind.dto;
 
 import java.io.Serializable;
 
+/**
+ * Player information.
+ * 
+ * @author Eduardo Jolo
+ *
+ */
 public class PlayerDTO implements Serializable {
 
 	/**
@@ -10,7 +16,7 @@ public class PlayerDTO implements Serializable {
 	private static final long serialVersionUID = -1560614907869188512L;
 
 	private String playerKey;
-	
+
 	private String playerName;
 
 	public PlayerDTO() {
@@ -31,7 +37,8 @@ public class PlayerDTO implements Serializable {
 	}
 
 	/**
-	 * @param playerKey the playerKey to set
+	 * @param playerKey
+	 *            the playerKey to set
 	 */
 	public void setPlayerKey(String playerKey) {
 		this.playerKey = playerKey;
@@ -45,10 +52,11 @@ public class PlayerDTO implements Serializable {
 	}
 
 	/**
-	 * @param playerName the playerName to set
+	 * @param playerName
+	 *            the playerName to set
 	 */
 	public void setPlayerName(String playerName) {
 		this.playerName = playerName;
 	}
-	
+
 }
