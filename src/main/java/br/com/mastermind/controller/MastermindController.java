@@ -66,7 +66,7 @@ public class MastermindController {
 	 * @return key pegs + true if guess is correct
 	 */
 	@RequestMapping(value="/guess", method= RequestMethod.POST, consumes="application/json")
-	public GuessResponseDTO guess(@Valid @RequestBody GuessRequestDTO guessRequestDTO, BindingResult result) {
+	public GuessResponseDTO guess(@Valid @RequestBody GuessRequestDTO guessRequestDTO) {
 		CodePegsColorValidator.validate(guessRequestDTO.getGuessedCode());
 		return guessService.guess(guessRequestDTO);
 	}
