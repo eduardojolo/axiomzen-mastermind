@@ -12,7 +12,7 @@ In order to start a new instance of axiomzen-mastermind microservice the followi
 + *Recompile if you want*:
   You can recompile the code if you want, just run the command below in the project folder:
   
-    mvn clean install
+    `mvn clean install`
 
   You will need the Java and Maven configured in your environment.
   I have uploaded the target folder to GitHub so compiling the project is not really necessary, just use the .jar available at `/target`.
