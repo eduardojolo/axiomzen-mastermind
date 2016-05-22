@@ -40,10 +40,10 @@ Done! Now you should have a local instance of the axiomzen-mastermind microservi
 + */newgame* (POST):
 To start a new game one of the players should send a POST to /newgame. The following JSON is an example of a valid request:
 
-    {
-      "playerName": "My Beautiful Name",
-      "numberOfPlayers" : 2
-    }
+          `{
+            "playerName": "My Beautiful Name",
+            "numberOfPlayers" : 2
+          }`
 The properties purpose are:
 `playerName`: (Required) The microservice requires a player name to create the game. It is required and an exception will be thrown if none is provided.
 `numberOfPlayers`: (Optional) If a user wants to start a multiplayer game he can inform here the number of players the application should wait for. The game will wait for ALL the players to connect before accepting guesses. If no value is given the application will assume 1 player.
