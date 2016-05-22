@@ -8,7 +8,7 @@ import java.io.Serializable;
  * @author Eduardo Jolo
  *
  */
-public class CreateGameResponseDTO implements Serializable {
+public class EnterGameResponseDTO implements Serializable {
 
 	/**
 	 * UID
@@ -18,6 +18,16 @@ public class CreateGameResponseDTO implements Serializable {
 	private String playerKey;
 	
 	private String gameKey;
+
+	public EnterGameResponseDTO() {
+		super();
+	}
+
+	public EnterGameResponseDTO(String playerKey, String gameKey) {
+		super();
+		this.playerKey = playerKey;
+		this.gameKey = gameKey;
+	}
 
 	/**
 	 * @return the playerKey

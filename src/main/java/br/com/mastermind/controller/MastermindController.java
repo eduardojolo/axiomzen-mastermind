@@ -9,11 +9,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.mastermind.dto.CreateGameRequestDTO;
-import br.com.mastermind.dto.CreateGameResponseDTO;
+import br.com.mastermind.dto.EnterGameResponseDTO;
 import br.com.mastermind.dto.GameGuessesRequestDTO;
 import br.com.mastermind.dto.GameGuessesResponseDTO;
 import br.com.mastermind.dto.GuessRequestDTO;
 import br.com.mastermind.dto.GuessResponseDTO;
+import br.com.mastermind.dto.JoinGameRequestDTO;
 import br.com.mastermind.service.IGameService;
 import br.com.mastermind.service.IGuessService;
 
@@ -36,12 +37,24 @@ public class MastermindController {
 	 * Creates a new game.
 	 * Requires a user name and returns the game key and a player key, to used when submiting a guess.
 	 * 
-	 * @param userName User name
+	 * @param createGameRequestDTO User name
 	 * @return game key + player key
 	 */
 	@RequestMapping(value="/newgame", method= RequestMethod.POST, consumes="application/json")
-	public CreateGameResponseDTO newGame(@RequestBody CreateGameRequestDTO createGameRequestDTO) {
-		return gameService.newGame(createGameRequestDTO.getUserName());
+	public EnterGameResponseDTO newGame(@RequestBody CreateGameRequestDTO createGameRequestDTO) {
+		return gameService.newGame(createGameRequestDTO.getPlayerName());
+	}
+	
+	/**
+	 * Joins an existing new game.
+	 * Requires a user name and returns the game key and a player key, to used when submiting a guess.
+	 * 
+	 * @param joinGameRequestDTO Player name + game key
+	 * @return game key + player key
+	 */
+	@RequestMapping(value="/joingame", method= RequestMethod.POST, consumes="application/json")
+	public EnterGameResponseDTO joinGame(@RequestBody JoinGameRequestDTO joinGameRequestDTO) {
+		return gameService.joinGame(joinGameRequestDTO);
 	}
 	
 	/**
@@ -65,4 +78,5 @@ public class MastermindController {
 	public GameGuessesResponseDTO getPlayerGuessesForGame(@Valid @RequestBody GameGuessesRequestDTO gameGuessesRequestDTO) {
 		return gameService.getPlayerGuessesForGame(gameGuessesRequestDTO.getGameKey());
 	}
+	
 }

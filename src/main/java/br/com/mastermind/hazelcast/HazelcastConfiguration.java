@@ -56,19 +56,19 @@ public class HazelcastConfiguration {
 						new MapConfig()
 							.setName(GAME_CACHE_MAP_NAME)
 							.setEvictionPolicy(EvictionPolicy.LRU)
-							.setMaxSizeConfig(new MaxSizeConfig().setMaxSizePolicy(MaxSizePolicy.FREE_HEAP_PERCENTAGE).setSize(15))
+							.setMaxSizeConfig(new MaxSizeConfig().setMaxSizePolicy(MaxSizePolicy.FREE_HEAP_PERCENTAGE).setSize(10))
 							.setTimeToLiveSeconds(TIME_TO_LIVE))
 				.addMapConfig(
 						new MapConfig()
 							.setName(GUESSES_CACHE_MAP_NAME)
 							.setEvictionPolicy(EvictionPolicy.LRU)
-							.setMaxSizeConfig(new MaxSizeConfig().setMaxSizePolicy(MaxSizePolicy.FREE_HEAP_PERCENTAGE).setSize(15))
+							.setMaxSizeConfig(new MaxSizeConfig().setMaxSizePolicy(MaxSizePolicy.FREE_HEAP_PERCENTAGE).setSize(10))
 							.setTimeToLiveSeconds(TIME_TO_LIVE))
 				.addMapConfig(
 						new MapConfig()
 							.setName(PLAYERS_CACHE_MAP_NAME)
 							.setEvictionPolicy(EvictionPolicy.LRU)
-							.setMaxSizeConfig(new MaxSizeConfig().setMaxSizePolicy(MaxSizePolicy.FREE_HEAP_PERCENTAGE).setSize(15))
+							.setMaxSizeConfig(new MaxSizeConfig().setMaxSizePolicy(MaxSizePolicy.FREE_HEAP_PERCENTAGE).setSize(10))
 							.setTimeToLiveSeconds(TIME_TO_LIVE));
 
 		return config;

@@ -8,6 +8,12 @@ import br.com.mastermind.dto.PlayerDTO;
 import br.com.mastermind.exceptions.NoPlayerWasFoundException;
 import br.com.mastermind.service.IPlayerService;
 
+/**
+ * Implementation of the methods that access the players information.
+ * 
+ * @author Eduardo Jolo
+ *
+ */
 @Service
 public class PlayerServiceImpl implements IPlayerService {
 
@@ -23,6 +29,11 @@ public class PlayerServiceImpl implements IPlayerService {
 		}
 		
 		return playerDTO;
+	}
+
+	@Override
+	public void savePlayer(PlayerDTO playerDTO) {
+		playerDAO.savePlayer(playerDTO);
 	}
 
 }

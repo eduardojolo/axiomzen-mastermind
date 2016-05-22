@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import br.com.mastermind.constants.MastermindConstants;
 import br.com.mastermind.dao.IGuessDAO;
@@ -24,6 +25,7 @@ import br.com.mastermind.service.IPlayerService;
  * @author Eduardo Jolo
  *
  */
+@Service
 public class GuessServiceImpl implements IGuessService {
 
 	@Autowired

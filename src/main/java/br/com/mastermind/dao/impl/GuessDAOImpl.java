@@ -2,6 +2,8 @@ package br.com.mastermind.dao.impl;
 
 import java.util.Map;
 
+import org.springframework.stereotype.Service;
+
 import com.hazelcast.core.IMap;
 
 import br.com.mastermind.dao.IGuessDAO;
@@ -9,6 +11,7 @@ import br.com.mastermind.dto.PlayerGuessesDTO;
 import br.com.mastermind.hazelcast.HazelcastConfiguration;
 import br.com.mastermind.hazelcast.HazelcastMastermindUtil;
 
+@Service
 public class GuessDAOImpl implements IGuessDAO {
 
 	@SuppressWarnings("unchecked")

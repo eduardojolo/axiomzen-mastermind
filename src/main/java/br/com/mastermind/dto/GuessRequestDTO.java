@@ -6,6 +6,8 @@ import java.util.List;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import br.com.mastermind.constants.MastermindConstants;
+
 /**
  * Request object for a guess.
  * 
@@ -26,7 +28,7 @@ public class GuessRequestDTO implements Serializable {
 	private String playerKey;
 	
 	@NotNull
-	@Size(min=8, max=8)
+	@Size(min=MastermindConstants.NUMBER_OF_POSITIONS, max=MastermindConstants.NUMBER_OF_POSITIONS)
 	private List<Character> guessedCode;
 
 	/**

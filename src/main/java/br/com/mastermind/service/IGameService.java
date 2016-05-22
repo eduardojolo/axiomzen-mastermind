@@ -1,8 +1,9 @@
 package br.com.mastermind.service;
 
-import br.com.mastermind.dto.CreateGameResponseDTO;
+import br.com.mastermind.dto.EnterGameResponseDTO;
 import br.com.mastermind.dto.GameDTO;
 import br.com.mastermind.dto.GameGuessesResponseDTO;
+import br.com.mastermind.dto.JoinGameRequestDTO;
 
 /**
  * Interface of the methods that access the game info.
@@ -19,7 +20,16 @@ public interface IGameService {
 	 *            User name
 	 * @return Game data
 	 */
-	CreateGameResponseDTO newGame(String userName);
+	EnterGameResponseDTO newGame(String userName);
+
+	/**
+	 * Generates a new playerKey in a game.
+	 * 
+	 * @param joinGameRequestDTO
+	 *            Join game data
+	 * @return game key = player key
+	 */
+	EnterGameResponseDTO joinGame(JoinGameRequestDTO joinGameRequestDTO);
 
 	/**
 	 * Get all the guesses made by all the users playing the game with the given
@@ -34,8 +44,10 @@ public interface IGameService {
 	/**
 	 * Set the winner of a game if no other was set before.
 	 * 
-	 * @param gameKey Game key
-	 * @param playerName Winner
+	 * @param gameKey
+	 *            Game key
+	 * @param playerName
+	 *            Winner
 	 */
 	void updateWinner(String gameKey, String playerName);
 

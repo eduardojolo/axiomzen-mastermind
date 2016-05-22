@@ -12,20 +12,20 @@ public class CreateGameRequestDTO implements Serializable {
 	private static final long serialVersionUID = -288574738791120749L;
 	
 	@NotNull
-	private String userName;
+	private String playerName;
 
 	/**
-	 * @return the userName
+	 * @return the playerName
 	 */
-	public String getUserName() {
-		return userName;
+	public String getPlayerName() {
+		return playerName;
 	}
 
 	/**
-	 * @param userName the userName to set
+	 * @param playerName the playerName to set
 	 */
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setPlayerName(String playerName) {
+		this.playerName = playerName;
 	}
-	
+
 }

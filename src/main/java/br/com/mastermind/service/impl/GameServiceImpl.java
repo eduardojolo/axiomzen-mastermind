@@ -1,6 +1,7 @@
 package br.com.mastermind.service.impl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
@@ -8,17 +9,21 @@ import java.util.Map;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import br.com.mastermind.constants.MastermindConstants;
 import br.com.mastermind.dao.IGameDAO;
 import br.com.mastermind.dao.IGuessDAO;
-import br.com.mastermind.dto.CreateGameResponseDTO;
+import br.com.mastermind.dto.EnterGameResponseDTO;
 import br.com.mastermind.dto.GameDTO;
 import br.com.mastermind.dto.GameGuessesResponseDTO;
+import br.com.mastermind.dto.JoinGameRequestDTO;
+import br.com.mastermind.dto.PlayerDTO;
 import br.com.mastermind.dto.PlayerGuessesDTO;
 import br.com.mastermind.exceptions.NoGameWasFoundException;
 import br.com.mastermind.service.IGameService;
+import br.com.mastermind.service.IPlayerService;
 import br.com.mastermind.util.CryptoUtil;
 
 /**
@@ -27,8 +32,12 @@ import br.com.mastermind.util.CryptoUtil;
  * @author Eduardo Jolo
  *
  */
+@Service
 public class GameServiceImpl implements IGameService {
 
+	@Autowired
+	private IPlayerService playerService;
+	
 	@Autowired
 	private IGameDAO gameDAO;
 	
@@ -36,18 +45,28 @@ public class GameServiceImpl implements IGameService {
 	private IGuessDAO guessDAO;
 	
 	@Override
-	public CreateGameResponseDTO newGame(String userName) {
-		CreateGameResponseDTO response = new CreateGameResponseDTO();
+	public EnterGameResponseDTO newGame(String playerName) {
 
 		Long timeInMillis = Calendar.getInstance().getTimeInMillis();
-		String gameKey = CryptoUtil.encryptString(timeInMillis + userName);
+		String gameKey = CryptoUtil.encryptString(timeInMillis + playerName);
+		String playerKey = CryptoUtil.encryptString(playerName + gameKey);
 		
 		this.createGame(gameKey, timeInMillis);
 		
-		response.setGameKey(gameKey);
-		response.setPlayerKey(CryptoUtil.encryptString(userName + gameKey));
-
-		return response;
+		playerService.savePlayer(new PlayerDTO(playerKey, playerName));
+		
+		return new EnterGameResponseDTO(playerKey, gameKey);
+	}
+	
+	@Override
+	public EnterGameResponseDTO joinGame(JoinGameRequestDTO joinGameRequestDTO) {
+		GameDTO game = this.getGame(joinGameRequestDTO.getGameKey());
+		
+		String playerKey = CryptoUtil.encryptString(joinGameRequestDTO.getPlayerName() + game.getGameKey());
+		
+		playerService.savePlayer(new PlayerDTO(playerKey, joinGameRequestDTO.getPlayerName()));
+		
+		return new EnterGameResponseDTO(playerKey, game.getGameKey());
 	}
 	
 	@Override
@@ -95,6 +114,10 @@ public class GameServiceImpl implements IGameService {
 		for (int i = 0; i < MastermindConstants.NUMBER_OF_POSITIONS; i++) {
 			code.add(MastermindConstants.COLORS.get(randomGenerator.nextInt(MastermindConstants.NUMBER_OF_COLORS)));
 		}
+		
+		//TODO remove
+		code = Arrays.asList('G','G','G','G');
+		
 
 		return code;
 	}
