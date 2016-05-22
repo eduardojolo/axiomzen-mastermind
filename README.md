@@ -70,7 +70,7 @@ If a game was created with the `numberOfPlayers` greater than 1 the game will wa
 + */guess* (POST):
 To actually play the players should use the /guess and submit their guesses. The available color codes are:
 
-    'R', 'B', 'G', 'P', 'Y', 'O', 'V', 'M'
+    `'R', 'B', 'G', 'P', 'Y', 'O', 'V', 'M'`
 
   Lets see an example:
 
@@ -82,7 +82,7 @@ To actually play the players should use the /guess and submit their guesses. The
 In this example the player `[B@24af8ebf` guessed that the code of the game `[B@7d5d41f5` was `["R","G","P","Y","V","M","M","G"]`.
 The response was:
 
-      {
+      `{
           "correctCode": false,
           "keyPegs": [
               "W",
@@ -91,7 +91,7 @@ The response was:
               "W"
           ],
           "gameHasAWinner": false
-      }
+      }`
 `correctCode`: Indicates if the guessed code was correct or not.
 `keyPegs`: For each correct color in the wrong position a white peg (W) is given. For each correct color in the correct position a black peg (B) is given.
 `gameHasAWinner`: This indicates if the game has been solved by any of the players. Important for multiplayer games. The player could use the `/gameguesses` to see who won and all the players guesses.
