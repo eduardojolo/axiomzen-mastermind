@@ -1,5 +1,5 @@
 #axiomzen-mastermind#
-    This is a microservice built for the Axiom Zen challenge during the VanHackathon. It is an implementation of the Mastermind game with 8 colors and 8 positions. This microservice acts as the codemaker and a predefine number of codebreakers can join the same game to compete and see who can break de code first.
+This is a microservice built for the Axiom Zen challenge during the VanHackathon. It is an implementation of the Mastermind game with 8 colors and 8 positions. This microservice acts as the codemaker and a predefine number of codebreakers can join the same game to compete and see who can break de code first.
 
 ---
 
