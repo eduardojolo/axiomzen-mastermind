@@ -3,6 +3,7 @@ package br.com.mastermind.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,6 +18,7 @@ import br.com.mastermind.dto.GuessResponseDTO;
 import br.com.mastermind.dto.JoinGameRequestDTO;
 import br.com.mastermind.service.IGameService;
 import br.com.mastermind.service.IGuessService;
+import br.com.mastermind.validator.CodePegsColorValidator;
 
 /**
  * Mastermind main controller that handles all the Rest requests.
@@ -64,7 +66,8 @@ public class MastermindController {
 	 * @return key pegs + true if guess is correct
 	 */
 	@RequestMapping(value="/guess", method= RequestMethod.POST, consumes="application/json")
-	public GuessResponseDTO guess(@Valid @RequestBody GuessRequestDTO guessRequestDTO) {
+	public GuessResponseDTO guess(@Valid @RequestBody GuessRequestDTO guessRequestDTO, BindingResult result) {
+		CodePegsColorValidator.validate(guessRequestDTO.getGuessedCode());
 		return guessService.guess(guessRequestDTO);
 	}
 	

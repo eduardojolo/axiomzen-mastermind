@@ -14,11 +14,13 @@ public class GuessResponseDTO implements Serializable {
 	/**
 	 * UID.
 	 */
-	private static final long serialVersionUID = 4373743430590639978L;
+	private static final long serialVersionUID = 2490488093514719366L;
 
 	private boolean correctCode;
 
 	private List<Character> keyPegs;
+	
+	private boolean gameHasAWinner;
 
 	public GuessResponseDTO() {
 		super();
@@ -58,6 +60,20 @@ public class GuessResponseDTO implements Serializable {
 	 */
 	public void setKeyPegs(List<Character> keyPegs) {
 		this.keyPegs = keyPegs;
+	}
+
+	/**
+	 * @return the gameHasAWinner
+	 */
+	public boolean isGameHasAWinner() {
+		return gameHasAWinner;
+	}
+
+	/**
+	 * @param gameHasAWinner the gameHasAWinner to set
+	 */
+	public void setGameHasAWinner(boolean gameHasAWinner) {
+		this.gameHasAWinner = gameHasAWinner;
 	}
 
 }

@@ -8,6 +8,7 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import br.com.mastermind.constants.MastermindConstants;
 import br.com.mastermind.dao.IGuessDAO;
@@ -54,6 +55,9 @@ public class GuessServiceImpl implements IGuessService {
 			
 			if(guessResponseDTO.isCorrectCode()) {
 				gameService.updateWinner(guessRequestDTO.getGameKey(), playerDTO.getPlayerName());
+				guessResponseDTO.setGameHasAWinner(true);
+			} else {
+				guessResponseDTO.setGameHasAWinner(!StringUtils.isEmpty(game.getWinner()));
 			}
 		}
 		
@@ -69,8 +73,6 @@ public class GuessServiceImpl implements IGuessService {
 	 * @return Check result
 	 */
 	private GuessResponseDTO checkGuessCode(List<Character> code, Set<Character> codeColors, List<Character> guessCode) {
-		GuessResponseDTO response = new GuessResponseDTO();
-		
 		List<Character> keyPegs = new ArrayList<>();
 		List<Character> whiteKeyPegsColors = new ArrayList<>();
 		
@@ -89,10 +91,9 @@ public class GuessServiceImpl implements IGuessService {
 			}
 		}
 		
-		response.setKeyPegs(keyPegs);
-		response.setCorrectCode(countBlackKeyPegs == MastermindConstants.NUMBER_OF_POSITIONS);
+		boolean correctCode = countBlackKeyPegs == MastermindConstants.NUMBER_OF_POSITIONS;
 		
-		return response;
+		return new GuessResponseDTO(correctCode, keyPegs);
 	}
 	
 	/**

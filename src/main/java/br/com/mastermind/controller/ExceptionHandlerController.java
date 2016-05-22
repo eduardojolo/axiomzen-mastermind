@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import br.com.mastermind.dto.ErrorResponseDTO;
+import br.com.mastermind.exceptions.InvalidPegColorCodeException;
 import br.com.mastermind.exceptions.MastermindGenericException;
 import br.com.mastermind.exceptions.NoGameWasFoundException;
 import br.com.mastermind.exceptions.NoPlayerWasFoundException;
@@ -27,7 +28,7 @@ public class ExceptionHandlerController {
 	 * @param noGameWasFoundException No game was found exception.
 	 * @return ErrorResponseDTO
 	 */
-	@ExceptionHandler({NoGameWasFoundException.class, NoPlayerWasFoundException.class})
+	@ExceptionHandler({NoGameWasFoundException.class, NoPlayerWasFoundException.class, InvalidPegColorCodeException.class})
 	@ResponseStatus(value = HttpStatus.NOT_FOUND)
 	@ResponseBody
 	public ErrorResponseDTO requestHandlingNoHandlerFound(RuntimeException runtimeException) {
