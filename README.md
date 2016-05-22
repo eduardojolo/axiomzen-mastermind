@@ -7,9 +7,11 @@ This is a microservice built for the Axiom Zen challenge during the VanHackathon
 In order to start a new instance of axiomzen-mastermind microservice the following steps are necessary:
 
 + *Get the code*:
+
   Download the project.
 
 + *Recompile if you want*:
+
   You can recompile the code if you want, just run the command below in the project folder:
   
     `mvn clean install`
@@ -18,6 +20,7 @@ In order to start a new instance of axiomzen-mastermind microservice the followi
   I have uploaded the target folder to GitHub so compiling the project is not really necessary, just use the .jar available at `/target`.
 
 + *Run the microservice*:
+
   The next step is to run the microservice. There are two ways of doing so:
   
   1) Using only Java:
@@ -40,10 +43,10 @@ Done! Now you should have a local instance of the axiomzen-mastermind microservi
 + */newgame* (POST):
 To start a new game one of the players should send a POST to /newgame. The following JSON is an example of a valid request:
 
-      {
-        "playerName": "My Beautiful Name",
-        "numberOfPlayers" : 2
-      }
+        {
+          "playerName": "My Beautiful Name",
+          "numberOfPlayers" : 2
+        }
 The properties purpose are:
 
 `playerName`: (Required) The microservice requires a player name to create the game. It is required and an exception will be thrown if none is provided.
