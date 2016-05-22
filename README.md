@@ -74,11 +74,11 @@ To actually play the players should use the /guess and submit their guesses. The
 
   Lets see an example:
 
-    {
-      "gameKey" : "[B@7d5d41f5",
-      "playerKey" : "[B@24af8ebf",
-      "guessedCode" : ["R","G","P","Y","V","M","M","G"]
-    }
+          `{
+            "gameKey" : "[B@7d5d41f5",
+            "playerKey" : "[B@24af8ebf",
+            "guessedCode" : ["R","G","P","Y","V","M","M","G"]
+          }`
 In this example the player `[B@24af8ebf` guessed that the code of the game `[B@7d5d41f5` was `["R","G","P","Y","V","M","M","G"]`.
 The response was:
 
