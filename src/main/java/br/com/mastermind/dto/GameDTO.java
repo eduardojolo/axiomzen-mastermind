@@ -1,6 +1,7 @@
 package br.com.mastermind.dto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -15,7 +16,7 @@ public class GameDTO implements Serializable {
 	/**
 	 * UID.
 	 */
-	private static final long serialVersionUID = 4786832551502242419L;
+	private static final long serialVersionUID = -4525089079747395170L;
 
 	private String gameKey;
 
@@ -27,16 +28,25 @@ public class GameDTO implements Serializable {
 
 	private String winner;
 
+	private Integer numberOfPlayers;
+
+	private List<String> players;
+
 	public GameDTO() {
 		super();
+		numberOfPlayers = 1;
+		players = new ArrayList<>();
 	}
 
-	public GameDTO(String gameKey, List<Character> code, Long startTime, Set<Character> codeColors) {
+	public GameDTO(String gameKey, List<Character> code, Long startTime, Set<Character> codeColors,
+			Integer numberOfPlayers) {
 		super();
 		this.gameKey = gameKey;
 		this.code = code;
 		this.startTime = startTime;
 		this.codeColors = codeColors;
+		this.numberOfPlayers = numberOfPlayers == null ? 1 : numberOfPlayers;
+		players = new ArrayList<>();
 	}
 
 	/**
@@ -112,6 +122,36 @@ public class GameDTO implements Serializable {
 	 */
 	public void setWinner(String winner) {
 		this.winner = winner;
+	}
+
+	/**
+	 * @return the numberOfPlayers
+	 */
+	public Integer getNumberOfPlayers() {
+		return numberOfPlayers;
+	}
+
+	/**
+	 * @param numberOfPlayers
+	 *            the numberOfPlayers to set
+	 */
+	public void setNumberOfPlayers(Integer numberOfPlayers) {
+		this.numberOfPlayers = numberOfPlayers;
+	}
+
+	/**
+	 * @return the players
+	 */
+	public List<String> getPlayers() {
+		return players;
+	}
+
+	/**
+	 * @param players
+	 *            the players to set
+	 */
+	public void setPlayers(List<String> players) {
+		this.players = players;
 	}
 
 }

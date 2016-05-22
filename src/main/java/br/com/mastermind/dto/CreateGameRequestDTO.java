@@ -12,13 +12,11 @@ import javax.validation.constraints.NotNull;
  */
 public class CreateGameRequestDTO implements Serializable {
 
-	/**
-	 * UID.
-	 */
-	private static final long serialVersionUID = -288574738791120749L;
 
 	@NotNull
 	private String playerName;
+	
+	private Integer numberOfPlayers;
 
 	/**
 	 * @return the playerName
@@ -33,6 +31,20 @@ public class CreateGameRequestDTO implements Serializable {
 	 */
 	public void setPlayerName(String playerName) {
 		this.playerName = playerName;
+	}
+
+	/**
+	 * @return the numberOfPlayers
+	 */
+	public Integer getNumberOfPlayers() {
+		return numberOfPlayers;
+	}
+
+	/**
+	 * @param numberOfPlayers the numberOfPlayers to set
+	 */
+	public void setNumberOfPlayers(Integer numberOfPlayers) {
+		this.numberOfPlayers = numberOfPlayers;
 	}
 
 }

@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import br.com.mastermind.dto.ErrorResponseDTO;
 import br.com.mastermind.exceptions.MastermindGenericException;
 import br.com.mastermind.exceptions.NoGameWasFoundException;
+import br.com.mastermind.exceptions.NoPlayerWasFoundException;
+import br.com.mastermind.exceptions.WaitingForPlayersException;
 
 /**
  * Exception handler controller.
@@ -25,11 +27,24 @@ public class ExceptionHandlerController {
 	 * @param noGameWasFoundException No game was found exception.
 	 * @return ErrorResponseDTO
 	 */
-	@ExceptionHandler(NoGameWasFoundException.class)
+	@ExceptionHandler({NoGameWasFoundException.class, NoPlayerWasFoundException.class})
 	@ResponseStatus(value = HttpStatus.NOT_FOUND)
 	@ResponseBody
-	public ErrorResponseDTO requestHandlingNoHandlerFound(NoGameWasFoundException noGameWasFoundException) {
-		return new ErrorResponseDTO(noGameWasFoundException.getMessage());
+	public ErrorResponseDTO requestHandlingNoHandlerFound(RuntimeException runtimeException) {
+		return new ErrorResponseDTO(runtimeException.getMessage());
+	}
+		
+	/**
+	 * Handle the WaitingForPlayersException returning a better message to the requester.
+	 * 
+	 * @param waitingForPlayersException Waiting for other players exception.
+	 * @return ErrorResponseDTO
+	 */
+	@ExceptionHandler(WaitingForPlayersException.class)
+	@ResponseStatus(value = HttpStatus.PRECONDITION_REQUIRED)
+	@ResponseBody
+	public ErrorResponseDTO requestHandlingNoHandlerFound(WaitingForPlayersException waitingForPlayersException) {
+		return new ErrorResponseDTO(waitingForPlayersException.getMessage());
 	}
 	
 	/**

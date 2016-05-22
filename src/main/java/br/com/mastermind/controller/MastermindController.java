@@ -42,7 +42,7 @@ public class MastermindController {
 	 */
 	@RequestMapping(value="/newgame", method= RequestMethod.POST, consumes="application/json")
 	public EnterGameResponseDTO newGame(@Valid @RequestBody CreateGameRequestDTO createGameRequestDTO) {
-		return gameService.newGame(createGameRequestDTO.getPlayerName());
+		return gameService.newGame(createGameRequestDTO);
 	}
 	
 	/**

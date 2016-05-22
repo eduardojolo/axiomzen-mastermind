@@ -1,5 +1,6 @@
 package br.com.mastermind.service;
 
+import br.com.mastermind.dto.CreateGameRequestDTO;
 import br.com.mastermind.dto.EnterGameResponseDTO;
 import br.com.mastermind.dto.GameDTO;
 import br.com.mastermind.dto.GameGuessesResponseDTO;
@@ -16,11 +17,11 @@ public interface IGameService {
 	/**
 	 * Create new game.
 	 * 
-	 * @param userName
-	 *            User name
+	 * @param createGameRequestDTO
+	 *            Info to create the new game
 	 * @return Game data
 	 */
-	EnterGameResponseDTO newGame(String userName);
+	EnterGameResponseDTO newGame(CreateGameRequestDTO createGameRequestDTO);
 
 	/**
 	 * Generates a new playerKey in a game.

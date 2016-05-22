@@ -14,6 +14,7 @@ import org.springframework.util.StringUtils;
 import br.com.mastermind.constants.MastermindConstants;
 import br.com.mastermind.dao.IGameDAO;
 import br.com.mastermind.dao.IGuessDAO;
+import br.com.mastermind.dto.CreateGameRequestDTO;
 import br.com.mastermind.dto.EnterGameResponseDTO;
 import br.com.mastermind.dto.GameDTO;
 import br.com.mastermind.dto.GameGuessesResponseDTO;
@@ -44,28 +45,28 @@ public class GameServiceImpl implements IGameService {
 	private IGuessDAO guessDAO;
 
 	@Override
-	public EnterGameResponseDTO newGame(String playerName) {
+	public EnterGameResponseDTO newGame(CreateGameRequestDTO createGameRequestDTO) {
 
 		Long timeInMillis = Calendar.getInstance().getTimeInMillis();
-		String gameKey = CryptoUtil.encryptString(timeInMillis + playerName);
-		String playerKey = CryptoUtil.encryptString(playerName + gameKey);
+		String gameKey = CryptoUtil.encryptString(timeInMillis + createGameRequestDTO.getPlayerName());
+		String playerKey = CryptoUtil.encryptString(createGameRequestDTO.getPlayerName() + gameKey);
 
-		this.createGame(gameKey, timeInMillis);
+		this.createGame(gameKey, timeInMillis, createGameRequestDTO.getNumberOfPlayers(), playerKey);
 
-		playerService.savePlayer(new PlayerDTO(playerKey, playerName));
+		playerService.savePlayer(new PlayerDTO(playerKey, createGameRequestDTO.getPlayerName()));
 
 		return new EnterGameResponseDTO(playerKey, gameKey);
 	}
 
 	@Override
 	public EnterGameResponseDTO joinGame(JoinGameRequestDTO joinGameRequestDTO) {
-		GameDTO game = this.getGame(joinGameRequestDTO.getGameKey());
-
-		String playerKey = CryptoUtil.encryptString(joinGameRequestDTO.getPlayerName() + game.getGameKey());
+		String playerKey = CryptoUtil.encryptString(joinGameRequestDTO.getPlayerName() + joinGameRequestDTO.getGameKey());
+		
+		this.updateGamePlayersList(joinGameRequestDTO.getGameKey(), playerKey);
 
 		playerService.savePlayer(new PlayerDTO(playerKey, joinGameRequestDTO.getPlayerName()));
-
-		return new EnterGameResponseDTO(playerKey, game.getGameKey());
+		
+		return new EnterGameResponseDTO(playerKey, joinGameRequestDTO.getGameKey());
 	}
 
 	@Override
@@ -106,10 +107,11 @@ public class GameServiceImpl implements IGameService {
 	 * @param timeInMillis
 	 *            start time
 	 */
-	private void createGame(String gameKey, Long timeInMillis) {
+	private void createGame(String gameKey, Long timeInMillis, Integer numberOfPlayers, String playerKey) {
 		List<Character> code = this.generateCode();
 
-		GameDTO newGame = new GameDTO(gameKey, code, timeInMillis, new HashSet<>(code));
+		GameDTO newGame = new GameDTO(gameKey, code, timeInMillis, new HashSet<>(code), numberOfPlayers);
+		newGame.getPlayers().add(playerKey);
 
 		gameDAO.saveGame(newGame);
 	}
@@ -130,4 +132,11 @@ public class GameServiceImpl implements IGameService {
 		return code;
 	}
 
+	private synchronized void updateGamePlayersList(String gameKey, String playerKey) {
+		GameDTO gameDTO = this.getGame(gameKey);
+		
+		gameDTO.getPlayers().add(playerKey);
+		
+		gameDAO.saveGame(gameDTO);
+	}
 }

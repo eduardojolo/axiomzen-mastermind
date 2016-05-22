@@ -16,6 +16,7 @@ import br.com.mastermind.dto.GuessRequestDTO;
 import br.com.mastermind.dto.GuessResponseDTO;
 import br.com.mastermind.dto.PlayerDTO;
 import br.com.mastermind.dto.PlayerGuessesDTO;
+import br.com.mastermind.exceptions.WaitingForPlayersException;
 import br.com.mastermind.service.IGameService;
 import br.com.mastermind.service.IGuessService;
 import br.com.mastermind.service.IPlayerService;
@@ -44,12 +45,16 @@ public class GuessServiceImpl implements IGuessService {
 		GameDTO game = gameService.getGame(guessRequestDTO.getGameKey());
 		PlayerDTO playerDTO = playerService.getPlayer(guessRequestDTO.getPlayerKey());
 		
-		GuessResponseDTO guessResponseDTO = this.checkGuessCode(game.getCode(), game.getCodeColors(), guessRequestDTO.getGuessedCode());
+		GuessResponseDTO guessResponseDTO = null;
 		
-		this.saveGuess(guessRequestDTO.getGameKey(), guessRequestDTO.getPlayerKey(), playerDTO.getPlayerName(), guessRequestDTO.getGuessedCode());
-		
-		if(guessResponseDTO.isCorrectCode()) {
-			gameService.updateWinner(guessRequestDTO.getGameKey(), playerDTO.getPlayerName());
+		if(this.validateAllPlayersJoined(game)) {			
+			guessResponseDTO = this.checkGuessCode(game.getCode(), game.getCodeColors(), guessRequestDTO.getGuessedCode());
+			
+			this.saveGuess(guessRequestDTO.getGameKey(), guessRequestDTO.getPlayerKey(), playerDTO.getPlayerName(), guessRequestDTO.getGuessedCode());
+			
+			if(guessResponseDTO.isCorrectCode()) {
+				gameService.updateWinner(guessRequestDTO.getGameKey(), playerDTO.getPlayerName());
+			}
 		}
 		
 		return guessResponseDTO;
@@ -119,5 +124,17 @@ public class GuessServiceImpl implements IGuessService {
 		guessDAO.saveGuesses(gameKey, mapGameGuesses);
 	}
 	
-	
+	/**
+	 * Validates if all the expected players have already joined the game and have theirs playerKeys
+	 * 
+	 * @param gameDTO Game
+	 * @return true if all the players have already joined the game
+	 */
+	private boolean validateAllPlayersJoined(GameDTO gameDTO) {
+		if(gameDTO.getNumberOfPlayers() > gameDTO.getPlayers().size()) {
+			throw new WaitingForPlayersException(gameDTO.getNumberOfPlayers() - gameDTO.getPlayers().size());
+		}
+		
+		return true;
+	}
 }
