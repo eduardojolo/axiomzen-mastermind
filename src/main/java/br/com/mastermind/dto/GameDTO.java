@@ -17,6 +17,7 @@ public class GameDTO implements Serializable {
 	private String winner;
 
 	public GameDTO() {
+		super();
 	}
 	
 	public GameDTO(String gameKey, List<Character> code, Long startTime, Set<Character> codeColors) {

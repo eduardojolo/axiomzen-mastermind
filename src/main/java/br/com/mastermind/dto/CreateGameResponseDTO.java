@@ -2,7 +2,18 @@ package br.com.mastermind.dto;
 
 import java.io.Serializable;
 
+/**
+ * Reponse for a new game created
+ * 
+ * @author Eduardo Jolo
+ *
+ */
 public class CreateGameResponseDTO implements Serializable {
+
+	/**
+	 * UID
+	 */
+	private static final long serialVersionUID = 9017083729748858114L;
 
 	private String playerKey;
 	

@@ -3,18 +3,46 @@ package br.com.mastermind.dto;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+/**
+ * Request object for a guess.
+ * 
+ * @author Eduardo Jolo
+ *
+ */
 public class GuessRequestDTO implements Serializable {
 
+	/**
+	 * UID.
+	 */
+	private static final long serialVersionUID = -6968003381041555165L;
+
+	@NotNull
 	private String gameKey;
 	
+	@NotNull
 	private String playerKey;
 	
+	@NotNull
+	@Size(min=8, max=8)
 	private List<Character> guessedCode;
 
+	/**
+	 * Default constructor.
+	 */
 	public GuessRequestDTO() {
-		
+		super();
 	}
 	
+	/**
+	 * Composed constructor.
+	 * 
+	 * @param gameKey Game key
+	 * @param playerKey Player key
+	 * @param guessedCode Guessed code
+	 */
 	public GuessRequestDTO(String gameKey, String playerKey, List<Character> guessedCode) {
 		super();
 		this.gameKey = gameKey;

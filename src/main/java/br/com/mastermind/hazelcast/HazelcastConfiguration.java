@@ -18,11 +18,30 @@ import com.hazelcast.config.MaxSizeConfig.MaxSizePolicy;
 @Configuration
 public class HazelcastConfiguration {
 
+	/**
+	 * Local instance cache.
+	 */
 	public static final String LOCAL_INSTANCE_NAME = "local";
 
+	/**
+	 * Games cache id.
+	 */
 	public static final String GAME_CACHE_MAP_NAME = "games";
 
+	/**
+	 * Guesses cache id.
+	 */
 	public static final String GUESSES_CACHE_MAP_NAME = "guesses";
+	
+	/**
+	 * Players cache id.
+	 */
+	public static final String PLAYERS_CACHE_MAP_NAME = "players";
+	
+	/**
+	 * Time to live of the elements in the caches.
+	 */
+	private static final int TIME_TO_LIVE = 172800;
 
 	/**
 	 * Configuration method.
@@ -37,12 +56,20 @@ public class HazelcastConfiguration {
 						new MapConfig()
 							.setName(GAME_CACHE_MAP_NAME)
 							.setEvictionPolicy(EvictionPolicy.LRU)
-							.setMaxSizeConfig(new MaxSizeConfig().setMaxSizePolicy(MaxSizePolicy.FREE_HEAP_PERCENTAGE).setSize(15)))
+							.setMaxSizeConfig(new MaxSizeConfig().setMaxSizePolicy(MaxSizePolicy.FREE_HEAP_PERCENTAGE).setSize(15))
+							.setTimeToLiveSeconds(TIME_TO_LIVE))
 				.addMapConfig(
 						new MapConfig()
 							.setName(GUESSES_CACHE_MAP_NAME)
 							.setEvictionPolicy(EvictionPolicy.LRU)
-							.setMaxSizeConfig(new MaxSizeConfig().setMaxSizePolicy(MaxSizePolicy.FREE_HEAP_PERCENTAGE).setSize(15)));
+							.setMaxSizeConfig(new MaxSizeConfig().setMaxSizePolicy(MaxSizePolicy.FREE_HEAP_PERCENTAGE).setSize(15))
+							.setTimeToLiveSeconds(TIME_TO_LIVE))
+				.addMapConfig(
+						new MapConfig()
+							.setName(PLAYERS_CACHE_MAP_NAME)
+							.setEvictionPolicy(EvictionPolicy.LRU)
+							.setMaxSizeConfig(new MaxSizeConfig().setMaxSizePolicy(MaxSizePolicy.FREE_HEAP_PERCENTAGE).setSize(15))
+							.setTimeToLiveSeconds(TIME_TO_LIVE));
 
 		return config;
 	}
